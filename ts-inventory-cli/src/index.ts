@@ -1,6 +1,6 @@
-import { ProductCategory } from "./InventoryManager.js";
-import type { Product } from "./InventoryManager.js";
-import { InventoryManager } from "./InventoryManager.js";
+import { ProductCategory } from "./models/product.model.js";
+import type { Product } from "./models/product.model.js";
+import { InventoryManager } from "./services/inventory.service.js";
 // src/index.ts
 
 let inventoryName: string = "Gudang Elektronik";
