@@ -28,3 +28,17 @@ const mouse: Product = {
 manager.addProduct(tv);
 manager.addProduct(mouse);
 manager.listProducts();
+
+
+type BrandInfo = {
+  country: string;
+  isPremium: boolean;
+};
+
+const brandCatalog = {
+  Samsung: { country: "South Korea", isPremium: true },
+  Logitech: { country: "Switzerland", isPremium: true }
+  // Xiaomi: { country: "China" } // Error: Property 'isPremium' is missing.
+} satisfies Record<string, BrandInfo>;
+
+console.log(brandCatalog.Samsung.country);
