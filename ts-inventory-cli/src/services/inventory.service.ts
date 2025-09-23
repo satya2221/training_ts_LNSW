@@ -1,4 +1,5 @@
 import type { Product } from "../models/product.model.js";
+import { LogMethodCall, MeasureTime } from "../decorators/log.decorator.js";
 
 class DatabaseConnection {
   connect() {
@@ -28,6 +29,8 @@ export class InventoryManager {
     console.log(`Produk "${product.name}" berhasil ditambahkan ke database.`);
   }
 
+  @LogMethodCall
+  @MeasureTime
   public async listProducts(): Promise<Product[]> {
     using db = new DatabaseConnection();
     db.connect();
