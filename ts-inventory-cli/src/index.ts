@@ -1,3 +1,6 @@
+import { ProductCategory } from "./InventoryManager.js";
+import type { Product } from "./InventoryManager.js";
+import { InventoryManager } from "./InventoryManager.js";
 // src/index.ts
 
 let inventoryName: string = "Gudang Elektronik";
@@ -10,33 +13,18 @@ console.log(`Selamat datang di ${inventoryName}!`);
 // Coba buat kesalahan!
 // totalItems = "lima ratus"; // TypeScript akan langsung error di sini!
 
-enum ProductCategory {
-  ELECTRONICS = "ELEKTRONIK",
-  ACCESSORIES = "AKSESORIS",
-  GADGETS = "GAJET",
-}
+const manager = new InventoryManager();
 
-
-interface Product {
-  id: number;
-  name: string;
-  brand: string;
-  price: number;
-  quantity: number;
-  category?: ProductCategory;
-}
-
-const firstProduct: Product = {
-  id: 1,
-  name: "Smart TV 55 inch",
-  brand: "Samsung",
-  price: 7500000,
-  quantity: 10,
-  category: ProductCategory.ELECTRONICS
+const tv: Product = {
+  id: 1, name: "Smart TV 55 inch", brand: "Samsung",
+  price: 7500000, quantity: 10, category: ProductCategory.ELECTRONICS
 };
 
-function printProductInfo(product: Product): void {
-  console.log(`- ${product.name} (${product.brand}), Harga: Rp${product.price}, Stok: ${product.quantity}`);
-}
+const mouse: Product = {
+  id: 2, name: "Wireless Mouse", brand: "Logitech",
+  price: 350000, quantity: 50, category: ProductCategory.ACCESSORIES
+};
 
-printProductInfo(firstProduct);
+manager.addProduct(tv);
+manager.addProduct(mouse);
+manager.listProducts();
