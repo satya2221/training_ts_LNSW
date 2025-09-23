@@ -32,21 +32,24 @@ export class InventoryManager {
     console.log("Inventory Manager diinisialisasi!");
   }
 
-  public addProduct(product: Product): void {
-    this.products.push(product);
-    console.log(`Produk "${product.name}" berhasil ditambahkan.`);
+  private simulateDbDelay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  public listProducts(): void {
+  public async addProduct(product: Product): Promise<void> {
+    await this.simulateDbDelay(2000); // Tunggu 500ms
+    this.products.push(product);
+    console.log(`Produk "${product.name}" berhasil ditambahkan ke database.`);
+  }
+
+  public async listProducts(): Promise<Product[]> {
     using db = new DatabaseConnection();
     db.connect();
 
-    if (this.products.length === 0) {
-      console.log("Inventaris masih kosong.");
-      return;
-    }
-    console.log("Daftar Produk di Inventaris dari DB:");
-    this.products.forEach(p => this.printProductInfo(p)); // Kita akan pindahkan fungsi ini juga
+    await this.simulateDbDelay(2500);
+
+    console.log("Mengambil daftar produk dari 'database'...");
+    return this.products;
   }
   private printProductInfo(product: Product): void {
     console.log(`- [${product.category}] ${product.name}, Stok: ${product.quantity}`);
