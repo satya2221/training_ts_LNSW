@@ -1,0 +1,3 @@
+[submodule "nest-inventory-api"]
+	path = nest-inventory-api
+	url = https://github.com/satya2221/start_learning_nest.git
